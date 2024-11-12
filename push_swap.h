@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/06 15:50:22 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/11 17:22:57 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/12 18:36:26 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,13 @@ t_stack	init_stack(int argc, char **argv);
 t_dlist	*new_node(int value, t_dlist *previous);
 int		push_bottom(t_dlist **tail, int value);
 void	display_stack(t_stack out);
+//  Sensory functions
 int		is_sorted(t_stack stack);
+int		distance_to_placement(t_stack stack, int value);
+int		distance_to_top(t_stack stack, int value);
+int		cheapest_between_push_swap(t_stack left, t_stack right, int a, int b);
+int		cost_to_push(t_stack left, t_stack right, int value);
+int		cheapest_in_stack(t_stack left, t_stack right);
 //  Program management
 void	throw_error(int error);
 void	cleanup(t_dlist *list);

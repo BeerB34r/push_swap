@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/06 15:50:24 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/11 18:34:03 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/12 14:17:38 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,7 @@ static long	atol_lim(char *string, long l_bound, long u_bound)
 	}
 	return (out);
 }
-/*
-static void	squash_values(t_stack out)
-{
-	int current;
 
-	current = 0;
-	while (current < out.size)
-	{
-	}
-}
-*/
 t_stack	init_stack(int argc, char **argv)
 {
 	t_stack	out;
@@ -99,7 +89,5 @@ t_stack	init_stack(int argc, char **argv)
 	out.head = head;
 	out.tail = tail;
 	out.size = i - 1;
-	display_stack(out);
-	ft_printf("Size: %d", out.size);
 	return (out);
 }
