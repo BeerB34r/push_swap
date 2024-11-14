@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/06 16:42:02 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/11 16:41:15 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/14 19:11:34 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ int	push_bottom(t_dlist **tail, int value)
 
 void	display_stack(t_stack out)
 {
+	int	i;
+
+	i = 0;
 	while (out.head != out.tail)
 	{
-		ft_printf("%p: %d\n", out.head, out.head->value);
+		ft_printf(" %d-%d", i, out.head->value);
 		out.head = out.head->next;
+		i++;
 	}
-	ft_printf("%p: %d\n", out.head, out.head->value);
+	ft_printf(" %d-%d\n", i, out.head->value);
 }

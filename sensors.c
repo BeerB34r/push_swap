@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/12 14:07:51 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/12 18:35:34 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/14 19:08:47 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	cheapest_in_stack(t_stack left, t_stack right)
 	while (current != left.tail)
 	{
 		current = current->next;
-		if (cheapest_between_push_swap(left, right, lowest, current->value)\
+		if (cheapest_between_push_swap(left, right, lowest, current->value) \
 			!= lowest)
 			lowest = current->value;
 	}

@@ -6,14 +6,17 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/11 15:22:53 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/12 18:41:33 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/14 16:08:36 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <stdio.h>
 
-void	print_stack_costs(t_stack left, t_stack right)
+void	print_stack_costs( \
+						t_stack left, \
+						t_stack right \
+						)
 {
 	t_dlist	*current;
 
@@ -24,6 +27,30 @@ void	print_stack_costs(t_stack left, t_stack right)
 		current = current->next;
 	}
 	printf("\nval: %d cost: %d",current->value, cost_to_push(left, right, current->value));
+}
+
+void	print_stack_costs2( \
+						t_stack a, \
+						t_stack b \
+						)
+{
+	t_dlist *current;
+
+	current = a.head;
+	while (current != a.tail)
+	{
+		printf("\nval: %d cost l: %d r: %d", \
+				current->value, \
+				push_cost(a, b, current->value, left_compare), \
+				push_cost(a, b, current->value, right_compare) \
+				);
+		current = current->next;
+	}
+	printf("\nval: %d cost l: %d r: %d", \
+			current->value, \
+			push_cost(a, b, current->value, left_compare), \
+			push_cost(a, b, current->value, right_compare) \
+			);
 }
 
 int	main(int argc, char **argv)
@@ -60,6 +87,10 @@ int	main(int argc, char **argv)
 	printf("\na is sorted: %s", is_sorted(a)?"yes":"no");
 	printf("\na costs");
 	print_stack_costs(a, b);
+	printf("\nnew func");
+	print_stack_costs2(a, b);
 	printf("\nb costs");
 	print_stack_costs(b, a);
+	printf("\nnew func");
+	print_stack_costs2(b, a);
 }
