@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/11 15:22:53 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/14 16:08:36 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/15 20:03:56 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	print_stack_costs2( \
 			);
 }
 
-int	main(int argc, char **argv)
+int	main1(int argc, char **argv)
 {
 	t_stack	a = init_stack(argc / 2, argv);
 	t_stack	b = init_stack(argc / 2, &argv[argc / 2]);
@@ -93,4 +93,28 @@ int	main(int argc, char **argv)
 	print_stack_costs(b, a);
 	printf("\nnew func");
 	print_stack_costs2(b, a);
+	return (0);
+}
+
+int	main2(int argc, char **argv)
+{
+	t_stack a = init_stack(argc, argv);
+	t_stack b = {0};
+
+	ft_printf("\nstack a:");
+	display_stack(a);
+	push(&a, &b, right);
+	push(&a, &b, right);
+	push(&a, &b, right);
+	ft_printf("\nthree elements swapped");
+	ft_printf("\nstack a:");
+	display_stack(a);
+	ft_printf("\nstack b:");
+	display_stack(b);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	main2(argc, argv);
 }

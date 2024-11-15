@@ -6,7 +6,7 @@
 #    By: mde-beer <mde-beer@student.codam.nl>          +#+                     #
 #                                                     +#+                      #
 #    Created: 2024/11/14 20:18:53 by mde-beer       #+#    #+#                 #
-#    Updated: 2024/11/14 20:40:57 by mde-beer       ########   odam.nl         #
+#    Updated: 2024/11/15 14:32:06 by mde-beer       ########   odam.nl         #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@
 	- robot.c
 		-	holds the two stacks, and calls the solving functions
 	- curta.c
-		-	will eventually hold the rotaty-keepy-tracky bits
+		-	holds the rotaty-keepy-tracky bits
 	- instructions.c
 		-	will eventually contain all the push_swap instruction functions
 
