@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/06 15:50:22 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/15 20:02:32 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/18 17:18:10 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,4 +183,5 @@ t_bool	left_compare(int current, int value, int next);
 t_bool	right_compare(int current, int value, int next);
 t_bool	greater(int a, int b);
 t_bool	lesser(int a, int b);
+t_bool	is_rotated_order(t_stack stack, t_bool (*order)(int, int));
 #endif

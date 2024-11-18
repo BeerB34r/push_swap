@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/06 16:42:02 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/15 18:34:29 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/18 16:50:27 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,18 @@ void	display_stack( \
 	int	i;
 
 	i = 0;
+	if (!out.head)
+	{
+		ft_printf(" [%p]", NULL);
+		return ;
+	}
 	while (out.head != out.tail)
 	{
-		ft_printf(" %d-%d", i, out.head->value);
+		ft_printf(" [%d-%d-%d]", out.head->prev->value, out.head->value, \
+		out.head->next->value);
 		out.head = out.head->next;
 		i++;
 	}
-	ft_printf(" %d-%d\n", i, out.head->value);
+	ft_printf(" [%d-%d-%d]", out.head->prev->value, out.head->value, \
+	out.head->next->value);
 }

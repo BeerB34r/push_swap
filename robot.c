@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/11 17:10:45 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/15 19:53:29 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/18 18:25:57 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,23 @@ int	push_swap( \
 {
 	t_stack	b;
 
-	if (a.size < 2 || is_solved(a, &lesser))
+	if (a.size < 2 || is_dlist_ordered(a.head, &lesser))
 		return (1);
 	b = (t_stack){.size = 0, .head = NULL, .tail = NULL};
 	if (a.size < 4)
-		return (solve_triplet(a, b, &lesser, left));
-	push(a, b, right);
-	push(a, b, right);
-	push(a, b, right);
-	solve_triplet(a, b, &greater, right);
+		return (solve_triplet(&a, &b, &lesser, left));
+	push(&a, &b, right);
+	push(&a, &b, right);
+	push(&a, &b, right);
+	solve_triplet(&a, &b, &greater, right);
 	while (a.size > 3)
-		push_cheapest(a, b, right);
+		push_cheapest(&a, &b, right);
 	while (a.size != 3)
 		push(a, b, left);
 	solve_triplet(a, b, &lesser, left);
 	while (b.size)
 		push_cheapest(a, b, left);
-	if (!is_solved(a, &lesser))
+	if (!is_dlist_ordered(a, &lesser))
 		rotate_to_solved(a, b, &lesser, left);
 	return (1);
 }

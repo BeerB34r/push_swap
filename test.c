@@ -6,94 +6,97 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/11 15:22:53 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/15 20:03:56 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/18 17:25:13 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <stdio.h>
 
-void	print_stack_costs( \
-						t_stack left, \
-						t_stack right \
-						)
+void	print_hand(t_stack *stack, const char *string)
 {
-	t_dlist	*current;
-
-	current = left.head;
-	while (current != left.tail)
-	{
-		printf("\nval: %d cost: %d",current->value, cost_to_push(left, right, current->value));
-		current = current->next;
-	}
-	printf("\nval: %d cost: %d",current->value, cost_to_push(left, right, current->value));
+	ft_printf("\n%s", string);
+	display_stack(*stack);
 }
 
-void	print_stack_costs2( \
-						t_stack a, \
-						t_stack b \
-						)
+void	print_both(t_stack *a, t_stack *b)
 {
-	t_dlist *current;
-
-	current = a.head;
-	while (current != a.tail)
-	{
-		printf("\nval: %d cost l: %d r: %d", \
-				current->value, \
-				push_cost(a, b, current->value, left_compare), \
-				push_cost(a, b, current->value, right_compare) \
-				);
-		current = current->next;
-	}
-	printf("\nval: %d cost l: %d r: %d", \
-			current->value, \
-			push_cost(a, b, current->value, left_compare), \
-			push_cost(a, b, current->value, right_compare) \
-			);
+	print_hand(a, "stack a:");
+	print_hand(b, "stack b:");
 }
 
-int	main1(int argc, char **argv)
+void	test_push(t_stack *a, t_stack *b)
 {
-	t_stack	a = init_stack(argc / 2, argv);
-	t_stack	b = init_stack(argc / 2, &argv[argc / 2]);
-	int		placedist1[2];
-	int		topdist1[2];
-	int		placedist2[2];
-	int		topdist2[2];
+	int	i;
 
-	placedist1[0] = distance_to_placement(b, 6);
-	placedist1[1] = b.size - placedist1[0];
-	topdist1[0] = distance_to_top(a, 6);
-	topdist1[1] = a.size - topdist1[0];
-	placedist2[0] = distance_to_placement(b, 12);
-	placedist2[1] = b.size - placedist2[0];
-	topdist2[0] = distance_to_top(a, 12);
-	topdist2[1] = a.size - topdist2[0];
-	printf("\ninitial stack a:");
-	display_stack(a);
-	printf("\ninitial stack b:");
-	display_stack(b);
-	printf("\nstack size a: %d b: %d", a.size, b.size);
-	printf("\nlowest cost between 6 and 12: %d",\
-			cheapest_between_push_swap(a, b, 6, 12));
-	printf("\ncost to push 6: %d\ncost to push 12: %d", cost_to_push(a, b, 6),\
-			cost_to_push(a, b, 12));
-	printf("\n6's place cost f: %d b: %d", placedist1[0], placedist1[1]);
-	printf("\n6's top cost f: %d b: %d", topdist1[0], topdist1[1]);
-	printf("\n12's place cost f: %d b: %d", placedist2[0], placedist2[1]);
-	printf("\n12's top cost f: %d b: %d", topdist2[0], topdist2[1]);
-	printf("\ncheapest cost in stack: %d", cheapest_in_stack(a, b));
-	printf("\na is sorted: %s", is_sorted(a)?"yes":"no");
-	printf("\na costs");
-	print_stack_costs(a, b);
-	printf("\nnew func");
-	print_stack_costs2(a, b);
-	printf("\nb costs");
-	print_stack_costs(b, a);
-	printf("\nnew func");
-	print_stack_costs2(b, a);
-	return (0);
+	ft_printf("\nTesting push\nInitial conditions");
+	print_both(a, b);
+	i = 0;
+	ft_printf("\n");
+	while (i++ < 3)
+		push(a, b, right);
+	print_both(a, b);
+	ft_printf("\n");
+	while (i-- > 0)
+		push(a, b, left);
+	print_both(a, b);
+}
+
+void	test_orot(t_stack *a, t_stack *b)
+{
+	ft_printf("\n");
+	push(a, b, right);
+	push(a, b, right);
+	push(a, b, right);
+	ft_printf("\nTesting orot\nInitial conditions");
+	print_both(a, b);
+	ft_printf("\n");
+	orot(a, b, (left | right));
+	print_both(a, b);
+	ft_printf("\n");
+	push(a, b, left);
+	push(a, b, left);
+	push(a, b, left);
+}
+
+void	test_rrot(t_stack *a, t_stack *b)
+{
+	ft_printf("\n");
+	push(a, b, right);
+	push(a, b, right);
+	push(a, b, right);
+	ft_printf("\nTesting rrot\nInitial conditions");
+	print_both(a, b);
+	ft_printf("\n");
+	rrot(a, b, (left | right ));
+	print_both(a, b);
+	ft_printf("\n");
+	push(a, b, left);
+	push(a, b, left);
+	push(a, b, left);
+}
+
+void	test_swap(t_stack *a, t_stack *b)
+{
+	ft_printf("\n");
+	push(a, b, right);
+	push(a, b, right);
+	push(a, b, right);
+	ft_printf("\nTesting swap\nInitial conditions");
+	print_both(a, b);
+	ft_printf("\n");
+	swap(a, b, (left | right ));
+	print_both(a, b);
+	ft_printf("\n");
+	push(a, b, left);
+	push(a, b, left);
+	push(a, b, left);
+}
+
+void	show_node(t_dlist *node)
+{
+	ft_printf("\nnode: [%d-%d-%d]", node->prev->value, node->value, \
+	node->next->value);
 }
 
 int	main2(int argc, char **argv)
@@ -101,20 +104,28 @@ int	main2(int argc, char **argv)
 	t_stack a = init_stack(argc, argv);
 	t_stack b = {0};
 
-	ft_printf("\nstack a:");
-	display_stack(a);
-	push(&a, &b, right);
-	push(&a, &b, right);
-	push(&a, &b, right);
-	ft_printf("\nthree elements swapped");
-	ft_printf("\nstack a:");
-	display_stack(a);
-	ft_printf("\nstack b:");
-	display_stack(b);
+	test_push(&a, &b);
+	test_orot(&a, &b);
+	test_rrot(&a, &b);
+	test_swap(&a, &b);
+	ft_printf("\nfinal conditions");
+	print_both(&a, &b);
+	return (0);
+}
+
+int	main3(int argc, char **argv)
+{
+	t_stack a = init_stack(argc, argv);
+	t_stack b = {0};
+
+	print_hand(&a, "a");
+	ft_printf("\nis a ordered: %s", is_rotated_order(a, lesser)?"yes":"no");
+	ft_printf("\nis a currently ordered: %s", is_dlist_ordered(a.head, lesser)?"yes":"no");
+	(void)a,(void)b;
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	main2(argc, argv);
+	main3(argc, argv);
 }

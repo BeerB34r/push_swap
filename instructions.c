@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/15 14:33:45 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/15 20:05:29 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/18 17:08:12 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void	swap( \
 			t_doubool action \
 			)
 {
-	if (action == left && a->size > 1)
+	if (action & left && a->size > 1)
 	{
 		dlist_swap(a->head);
 		a->head = a->head->prev;
 		if (a->size == 2)
 			a->tail = a->head->next;
 	}
-	if (action == right && b->size > 1)
+	if (action & right && b->size > 1)
 	{
 		dlist_swap(b->head);
 		b->head = b->head->prev;
@@ -52,7 +52,7 @@ void	swap( \
 	print_instruction(SWAP, action);
 }
 
-void	orot( \
+void	rrot( \
 			t_stack *a, \
 			t_stack *b, \
 			t_doubool action \
@@ -68,10 +68,10 @@ void	orot( \
 		b->head = b->head->prev;
 		b->tail = b->tail->prev;
 	}
-	print_instruction(OROT, action);
+	print_instruction(RROT, action);
 }
 
-void	rrot( \
+void	orot( \
 			t_stack *a, \
 			t_stack *b, \
 			t_doubool action \
@@ -87,7 +87,7 @@ void	rrot( \
 		b->head = b->head->next;
 		b->tail = b->tail->next;
 	}
-	print_instruction(RROT, action);
+	print_instruction(OROT, action);
 }
 
 void	push( \
@@ -96,11 +96,25 @@ void	push( \
 			t_doubool action \
 			)
 {
-	if (action == left && a->size)
+	if (action == left && b->size)
 	{
 		dlist_push(dlist_pop(&(b->head)), &(a->head));
+		a->size++;
+		b->size--;
 	}
-	else if (action == right && b->size)
+	else if (action == right && a->size)
+	{
 		dlist_push(dlist_pop(&(a->head)), &(b->head));
+		b->size++;
+		a->size--;
+	}
+	if (!a->tail)
+		a->tail = a->head;
+	if (!b->tail)
+		b->tail = b->head;
+	if (!a->head)
+		a->tail = NULL;
+	if (!b->head)
+		b->tail = NULL;
 	print_instruction(PUSH, action);
 }

@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/15 18:33:40 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/15 20:02:15 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/18 17:07:24 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,12 @@ void	dlist_swap( \
 	t_dlist *const	d = node->next->next;
 
 	a->next = c;
-	c->prev = a;
 	b->next = d;
+	c->next = b;
 	d->prev = b;
-	c->prev = b;
-	b->next = c;
+	c->prev = a;
+	b->prev = c;
+	(void)b,(void)c,(void)a,(void)d;
 }
 
 /**
