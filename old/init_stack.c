@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/06 15:50:24 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 12:47:44 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/12 14:17:38 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 #include <limits.h>
 #include <stdlib.h>
 
-static int
-	is_int(
-char *string
-)
+static int	is_int(char *string)
 {
 	if (!ft_isdigit(*string) && *string != '-')
 		return (0);
@@ -29,11 +26,7 @@ char *string
 	return (1);
 }
 
-static int
-	is_dup(
-t_dlist *head,
-int value
-)
+static int	is_dup(t_dlist *head, int value)
 {
 	t_dlist	*current;
 
@@ -51,12 +44,7 @@ int value
 	return (0);
 }
 
-static long
-	atol_lim(
-char *string,
-long l_bound,
-long u_bound
-)
+static long	atol_lim(char *string, long l_bound, long u_bound)
 {
 	long	out;
 	int		sign;
@@ -77,11 +65,7 @@ long u_bound
 	return (out);
 }
 
-t_stack
-	init_stack(
-int argc,
-char **argv
-)
+t_stack	init_stack(int argc, char **argv)
 {
 	t_stack	out;
 	t_dlist	*head;

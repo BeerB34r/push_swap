@@ -6,17 +6,14 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/18 17:59:34 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 18:00:55 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/19 11:22:18 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <libft.h>
 
-static int
-	lowest_in_dlist(
-t_dlist *node
-)
+static int	lowest_in_dlist(t_dlist *node)
 {
 	int		lowest;
 	t_dlist	*current;
@@ -32,15 +29,10 @@ t_dlist *node
 	return (lowest);
 }
 
-static int
-	rotate_order(
-t_stack *a,
-int target
-)
+static int	rotate_order(t_stack *a, int target)
 {
-	int	cost;
+	const int	cost = top_cost(*a, target);
 
-	cost = top_cost(*a, target);
 	if (cost > a->size)
 	{
 		cost = cost - a->size;
@@ -55,92 +47,25 @@ int target
 	return (0);
 }
 
-void
-	rotate_tandem(
-t_stack *a,
-t_stack *b,
-t_hero hero,
-t_doubool direction
-)
-{
-	while (hero.oracle.top > 0 && hero.oracle.place > 0)
-	{
-		hero.oracle.top--;
-		hero.oracle.place--;
-		orot(a, b, (left | right));
-	}
-	while (hero.oracle.top < 0 && hero.oracle.place < 0)
-	{
-		hero.oracle.top++;
-		hero.oracle.place++;
-		rrot(a, b, (left | right));
-	}
-	while (hero.oracle.top)
-	{
-		if (hero.oracle.top < 0)
-		{
-			hero.oracle.top++;
-			rrot(a, b, direction);
-		}
-		else
-		{
-			hero.oracle.top--;
-			orot(a, b, direction);
-		}
-	}
-	while (hero.oracle.place)
-	{
-		if (hero.oracle.place < 0)
-		{
-			hero.oracle.place++;
-			rrot(a, b, ~(direction));
-		}
-		else
-		{
-			hero.oracle.place--;
-			orot(a, b, ~(direction));
-		}
-	}
-}
-
-void
-	push_min(
-t_stack *a,
-t_stack *b,
-t_bool (*comparison)(int, int, int),
-t_doubool direction
-)
-{
-	t_hero	hero;
-
-	if (direction == left)
-		hero = chiron(a, b, comparison);
-	else
-		hero = chiron(b, a, comparison);
-	rotate_tandem(a, b, hero, direction);
-	push(a, b, direction);
-}
-
-int
-	push_swap(
-t_stack a
-)
+int	push_swap( \
+			t_stack a \
+			)
 {
 	t_stack	b;
 
-	if (a.size < 2 || is_dlist_ordered(a.head, &lesser))
+	if (a.size < 2 || is_dlist_ordered(a->head, &lesser))
 		return (0);
+	b = (t_stack){.size = 0, .head = NULL, .tail = NULL};
 	if (a.size < 4)
 		if (!is_rotated_order(a, &lesser))
-			swap(&a, NULL, left);
+			swap(&a, &b, left);
 	if (is_rotated_order(a, &lesser))
 		return (rotate_order(&a, lowest_in_dlist(a.head)));
-	b = (t_stack){.size = 0, .head = NULL, .tail = NULL};
 	while (a.size > 3)
-		push_min(&a, &b, right_compare, right);
+		push_min(&a, &b, right_compare);
 	if (!is_rotated_order(a, &lesser))
 		swap(&a, &b, left);
 	while (b.size)
-		push_min(&a, &b, left_compare, left);
+		push_min(&a, &b, left_compare);
 	return (rotate_order(&a, lowest_in_dlist(a.head)));
 }

@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/13 17:33:09 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 16:58:07 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/25 10:58:43 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 /**
 *	determines the cost to get some @value in @stack to the top
 */
-int
-	top_cost(
-t_stack stack,
-int value
-)
+int	top_cost( \
+			t_stack stack, \
+			int value \
+			)
 {
 	int		i;
 	t_dlist	*current;
@@ -45,12 +44,11 @@ int value
 *	@comparison should be either left_compare() or right_compare(), determined
 *	by current chirality
 */
-int
-	place_cost(
-t_stack stack,
-int value,
-t_bool (*comparison)(int, int, int)
-)
+int	place_cost( \
+			t_stack stack, \
+			int value, \
+			t_bool (*comparison)(int, int, int) \
+			)
 {
 	int		i;
 	t_dlist	*current;
@@ -75,13 +73,12 @@ t_bool (*comparison)(int, int, int)
 *	@comparison should be either left_compare() or right_compare(), determined
 *	by current chirality
 */
-int
-	push_cost(
-t_stack a,
-t_stack b,
-int value,
-t_bool (*comparison)(int, int, int)
-)
+int	push_cost( \
+			t_stack a, \
+			t_stack b, \
+			int value, \
+			t_bool (*comparison)(int, int, int) \
+			)
 {
 	int	p_cost;
 	int	t_cost;
@@ -101,12 +98,11 @@ t_bool (*comparison)(int, int, int)
 *	@comparison should be either left_compare() or right_compare(), determined
 *	by current chirality
 */
-int
-	min_cost(
-t_stack a,
-t_stack b,
-t_bool (*comparison)(int, int, int)
-)
+int	min_cost( \
+			t_stack a, \
+			t_stack b, \
+			t_bool	(*comparison)(int, int, int) \
+			)
 {
 	int		lowest_value;
 	int		lowest_cost;
@@ -127,4 +123,15 @@ t_bool (*comparison)(int, int, int)
 		}
 	}
 	return (lowest_value);
+}
+
+void	push_min( \
+			t_stack *a, \
+			t_stack *b, \
+			t_bool (*comparison)(int, int, int) \
+			)
+{
+	const int	target = min_cost(*a, *b, comparison);
+	const int	top_cost = top_cost(
+	t_o_ret		costs;
 }

@@ -6,17 +6,16 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/15 18:33:40 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 12:44:49 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/18 17:07:24 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <libft.h>
 
-t_dlist
-	*dlist_pop(
-t_dlist **head
-)
+t_dlist	*dlist_pop( \
+					t_dlist **head \
+					)
 {
 	t_dlist *const	ret = (*head);
 
@@ -31,11 +30,10 @@ t_dlist **head
 	return (ret);
 }
 
-void
-	dlist_push(
-t_dlist *node,
-t_dlist **head
-)
+void	dlist_push( \
+					t_dlist *node, \
+					t_dlist **head \
+					)
 {
 	if (!(*head))
 	{
@@ -54,10 +52,9 @@ t_dlist **head
 /**
 *	swaps @nodes position to that of @node->next, and vice versa
 */
-void
-	dlist_swap(
-t_dlist *node
-)
+void	dlist_swap( \
+					t_dlist *node \
+					)
 {
 	t_dlist *const	a = node->prev;
 	t_dlist *const	b = node;
@@ -70,15 +67,15 @@ t_dlist *node
 	d->prev = b;
 	c->prev = a;
 	b->prev = c;
+	(void)b,(void)c,(void)a,(void)d;
 }
 
 /**
 *	@returns a malloced circular node with value == @value
 */
-t_dlist
-	*dlist_new(
-int value
-)
+t_dlist	*dlist_new( \
+					int value \
+					)
 {
 	t_dlist *const	out = ft_calloc(1, sizeof(t_dlist));
 
@@ -96,10 +93,9 @@ int value
 *	t_dlist *head = dlist_dup((t_dlist *){.value = 42, .next = &a, .prev = &b})
 *	NOTE: will copy exactly from @src, make sure its pointers are valid!
 */
-t_dlist
-	*dlist_dup(
-t_dlist src
-)
+t_dlist	*dlist_dup( \
+					t_dlist src \
+					)
 {
 	t_dlist *const	out = ft_calloc(1, sizeof(t_dlist));
 

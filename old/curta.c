@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/14 20:40:59 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 11:15:44 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/19 11:40:18 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@
 *	Herzstark were liberated in april of '45 by the Americans
 */
 
-t_bool
-	is_dlist_ordered(
-t_dlist *head,
-t_bool (*order)(int, int)
-)
+t_bool	is_dlist_ordered( \
+					t_dlist *head, \
+					t_bool (*order)(int, int) \
+					)
 {
 	t_dlist	*current;
 
@@ -46,11 +45,10 @@ t_bool (*order)(int, int)
 	return (truey);
 }
 
-t_bool
-	is_rotated_order(
-t_stack stack,
-t_bool (*order)(int, int)
-)
+t_bool	is_rotated_order( \
+					t_stack stack, \
+					t_bool (*order)(int, int) \
+					)
 {
 	t_dlist	*current;
 

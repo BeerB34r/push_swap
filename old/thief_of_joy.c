@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/13 17:33:12 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 16:44:05 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/22 13:39:49 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,27 @@ signed int next
 	return (current < value && value < next);
 }
 
-t_bool
-	right_compare(
-signed int current,
-signed int value,
-signed int next
-)
+t_bool	right_compare( \
+					int current, \
+					int value, \
+					int next \
+					)
 {
 	return (current > value && value > next);
 }
 
-t_bool
-	greater(
-signed int a,
-signed int b
-)
+t_bool	greater( \
+			int a, \
+			int b \
+			)
 {
 	return (a > b);
 }
 
-t_bool
-	lesser(
-signed int a,
-signed int b
-)
+t_bool	lesser( \
+			int a, \
+			int b \
+			)
 {
 	return (a < b);
 }

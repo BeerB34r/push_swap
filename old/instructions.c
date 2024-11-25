@@ -6,18 +6,17 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/15 14:33:45 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 12:49:48 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/25 11:03:46 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <libft.h>
 
-static void
-	print_instruction(
-const char *category,
-t_doubool target
-)
+static void	print_instruction( \
+			const char *category, \
+			t_doubool target \
+			)
 {
 	char	c;
 
@@ -30,12 +29,11 @@ t_doubool target
 	ft_printf("%s%c", category, c);
 }
 
-void
-	swap(
-t_stack *a,
-t_stack *b,
-t_doubool action
-)
+void	swap( \
+			t_stack *a,
+			t_stack *b,
+			t_doubool action \
+			)
 {
 	if (action & left && a->size > 1)
 	{
@@ -54,12 +52,11 @@ t_doubool action
 	print_instruction(SWAP, action);
 }
 
-void
-	rrot(
-t_stack *a,
-t_stack *b,
-t_doubool action
-)
+void	rrot( \
+			t_stack *a, \
+			t_stack *b, \
+			t_doubool action \
+			)
 {
 	if (action & left)
 	{
@@ -74,12 +71,11 @@ t_doubool action
 	print_instruction(RROT, action);
 }
 
-void
-	orot(
-t_stack *a,
-t_stack *b,
-t_doubool action
-)
+void	orot( \
+			t_stack *a, \
+			t_stack *b, \
+			t_doubool action \
+			)
 {
 	if (action & left)
 	{
@@ -94,12 +90,11 @@ t_doubool action
 	print_instruction(OROT, action);
 }
 
-void
-	push(
-t_stack *a,
-t_stack *b,
-t_doubool action
-)
+void	push( \
+			t_stack *a, \
+			t_stack *b, \
+			t_doubool action \
+			)
 {
 	if (action == left && b->size)
 	{

@@ -1,52 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         ::::::::           */
-/*   thief_of_joy.c                                      :+:    :+:           */
+/*   program_management.c                                :+:    :+:           */
 /*                                                      +:+                   */
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
-/*   Created: 2024/11/13 17:33:12 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 16:44:05 by mde-beer       ########   odam.nl        */
+/*   Created: 2024/11/06 16:43:42 by mde-beer       #+#    #+#                */
+/*   Updated: 2024/11/11 16:31:00 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-#include <libft.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-t_bool
-	left_compare(
-signed int current,
-signed int value,
-signed int next
-)
+void	cleanup(t_dlist *list)
 {
-	return (current < value && value < next);
+	t_dlist	*const head = list;
+	t_dlist	*current;
+	t_dlist	*next;
+
+	current = head;
+	while (current->next != head)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	free(current);
 }
 
-t_bool
-	right_compare(
-signed int current,
-signed int value,
-signed int next
-)
+void	throw_error(int error)
 {
-	return (current > value && value > next);
-}
-
-t_bool
-	greater(
-signed int a,
-signed int b
-)
-{
-	return (a > b);
-}
-
-t_bool
-	lesser(
-signed int a,
-signed int b
-)
-{
-	return (a < b);
+	write(2, "Error\n", 6);
+	exit(error);
 }
