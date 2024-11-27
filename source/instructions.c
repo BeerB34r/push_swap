@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/15 14:33:45 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 12:49:48 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/27 15:38:55 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_doubool target
 		c = 'b';
 	else
 		c = category[0];
-	ft_printf("%s%c", category, c);
+	ft_printf("%s%c\n", category, c);
 }
 
 void
@@ -52,6 +52,10 @@ t_doubool action
 			b->tail = b->head->next;
 	}
 	print_instruction(SWAP, action);
+//	a?display_stack(*a):"";
+//	ft_printf("\n");
+//	b?display_stack(*b):"";
+//	ft_printf("\n");
 }
 
 void
@@ -72,6 +76,10 @@ t_doubool action
 		b->tail = b->tail->prev;
 	}
 	print_instruction(RROT, action);
+//	a?display_stack(*a):"";
+//	ft_printf("\n");
+//	b?display_stack(*b):"";
+//	ft_printf("\n");
 }
 
 void
@@ -92,6 +100,10 @@ t_doubool action
 		b->tail = b->tail->next;
 	}
 	print_instruction(OROT, action);
+//	a?display_stack(*a):"";
+//	ft_printf("\n");
+//	b?display_stack(*b):"";
+//	ft_printf("\n");
 }
 
 void
@@ -122,4 +134,8 @@ t_doubool action
 	if (!b->head)
 		b->tail = NULL;
 	print_instruction(PUSH, action);
+//	a?display_stack(*a):"";
+//	ft_printf("\n");
+//	b?display_stack(*b):"";
+//	ft_printf("\n");
 }

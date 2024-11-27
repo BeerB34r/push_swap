@@ -136,6 +136,12 @@ t_o_ret
 		int op,
 		int rp
 		);	// FILE: oracle.c
+t_hero
+	chiron(
+		t_stack *a,
+		t_stack *b,
+		t_bool (*comparison)(int, int, int)
+		);	// FILE: oracle.c
 int	
 	top_cost(
 		t_stack stack,
