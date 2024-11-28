@@ -6,14 +6,14 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/18 17:59:34 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/27 18:51:27 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/11/28 20:37:34 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <libft.h>
 
-static int
+int
 	condition_in_dlist(
 t_dlist *node,
 t_bool (*comparison)(int, int)
@@ -33,7 +33,7 @@ t_bool (*comparison)(int, int)
 	return (value);
 }
 
-static int
+int
 	rotate_order(
 t_stack *a,
 int target,
@@ -131,8 +131,6 @@ t_doubool direction
 		hero = chiron(b, a, comparison);
 	rotate_tandem(a, b, hero, direction);
 	push(a, b, direction);
-	if (direction == left)
-		rotate_order(a, condition_in_dlist(a->head, &lesser), left);
 }
 
 int
@@ -154,7 +152,6 @@ t_stack a
 		push_min(&a, &b, right_compare, right);
 	if (!is_rotated_order(a, &lesser))
 		swap(&a, &b, left);
-	rotate_order(&a, condition_in_dlist(a.head, &lesser), left);
 	//display_stack(a),ft_printf("\n"),display_stack(b);
 	while (b.size)
 		push_min(&a, &b, left_compare, left);

@@ -231,4 +231,19 @@ void
 	cleanup(
 		t_dlist *head
 		);	// FILE: program_management.c
+int
+	condition_in_dist(
+		t_dlist *node,
+		t_bool (*comparison)(int, int)
+		);	// FILE: juggler.c
+int
+	rotate_order(
+		t_stack *a,
+		int target,
+		t_doubool direction
+		);	// FILE: juggler.c
+int
+	pivot(
+		t_stack a
+		);	// FILE: killme.c
 #endif

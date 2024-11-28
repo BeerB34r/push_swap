@@ -6,7 +6,7 @@
 #    By: mde-beer <mde-beer@student.codam.nl>          +#+                     #
 #                                                     +#+                      #
 #    Created: 2024/11/27 13:22:56 by mde-beer       #+#    #+#                 #
-#    Updated: 2024/11/27 14:35:44 by mde-beer       ########   odam.nl         #
+#    Updated: 2024/11/28 20:39:32 by mde-beer       ########   odam.nl         #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRC				=	accountancy.c \
 					oracle.c \
 					program_management.c \
 					stack_management.c \
-					thief_of_joy.c
+					thief_of_joy.c \
+					killme.c
 SRCDIR			=	source
 OBJ				=	$(SRC:.c=.o)
 OBJDIR			=	objects
