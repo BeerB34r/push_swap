@@ -1,39 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         ::::::::           */
-/*   instructions.c                                      :+:    :+:           */
+/*   checker_instructions.c                              :+:    :+:           */
 /*                                                      +:+                   */
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
-/*   Created: 2024/11/15 14:33:45 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/29 13:50:06 by mde-beer       ########   odam.nl        */
+/*   Created: 2024/11/29 17:06:00 by mde-beer       #+#    #+#                */
+/*   Updated: 2024/11/29 17:16:04 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 #include <libft.h>
 
-static void
-	print_instruction(
-const char *category,
-t_doubool target
-)
-{
-	char	c;
-
-	if (target == left)
-		c = 'a';
-	else if (target == right)
-		c = 'b';
-	else
-		c = category[0];
-#ifndef CHECKER
-	ft_printf("%s%c\n", category, c);
-#endif
-}
-
 void
-	swap(
+	c_swap(
 t_stack *a,
 t_stack *b,
 t_doubool action
@@ -53,39 +34,10 @@ t_doubool action
 		if (b->size == 2)
 			b->tail = b->head->next;
 	}
-	print_instruction(SWAP, action);
-//	a?display_stack(*a):"";
-//	ft_printf("\n");
-//	b?display_stack(*b):"";
-//	ft_printf("\n");
 }
 
 void
-	rrot(
-t_stack *a,
-t_stack *b,
-t_doubool action
-)
-{
-	if (action & left)
-	{
-		a->head = a->head->prev;
-		a->tail = a->tail->prev;
-	}
-	if (action & right)
-	{
-		b->head = b->head->prev;
-		b->tail = b->tail->prev;
-	}
-	print_instruction(RROT, action);
-//	a?display_stack(*a):"";
-//	ft_printf("\n");
-//	b?display_stack(*b):"";
-//	ft_printf("\n");
-}
-
-void
-	orot(
+	c_orot(
 t_stack *a,
 t_stack *b,
 t_doubool action
@@ -101,15 +53,29 @@ t_doubool action
 		b->head = b->head->next;
 		b->tail = b->tail->next;
 	}
-	print_instruction(OROT, action);
-//	a?display_stack(*a):"";
-//	ft_printf("\n");
-//	b?display_stack(*b):"";
-//	ft_printf("\n");
 }
 
 void
-	push(
+	c_rrot(
+t_stack *a,
+t_stack *b,
+t_doubool action
+)
+{
+	if (action & left)
+	{
+		a->head = a->head->prev;
+		a->tail = a->tail->prev;
+	}
+	if (action & right)
+	{
+		b->head = b->head->prev;
+		b->tail = b->tail->prev;
+	}
+}
+
+void
+	c_push(
 t_stack *a,
 t_stack *b,
 t_doubool action
@@ -135,9 +101,17 @@ t_doubool action
 		a->tail = NULL;
 	if (!b->head)
 		b->tail = NULL;
-	print_instruction(PUSH, action);
-//	a?display_stack(*a):"";
-//	ft_printf("\n");
-//	b?display_stack(*b):"";
-//	ft_printf("\n");
+}
+
+void
+	c_wrng(
+t_stack *a,
+t_stack *b,
+t_doubool action
+)
+{
+	(void)a;
+	(void)b;
+	(void)action;
+	throw_error("Error\n");
 }

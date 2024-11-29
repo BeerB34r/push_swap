@@ -37,6 +37,9 @@
 # define OROT "r"
 # define RROT "rr"
 # define PUSH "p"
+# ifndef VERBOSE
+#  define VERBOSE 0
+# endif
 
 //	Datatypes
 typedef struct s_dlist				t_dlist;
@@ -216,6 +219,37 @@ void
 		t_stack *b,
 		t_doubool action
 		);	// FILE: instructions.c
+//		Checker
+void
+	c_swap(
+		t_stack *a,
+		t_stack *b,
+		t_doubool action
+		);	// FILE: checker_instructions.c
+void
+	c_orot(
+		t_stack *a,
+		t_stack *b,
+		t_doubool action
+		);	// FILE: checker_instructions.c
+void
+	c_rrot(
+		t_stack *a,
+		t_stack *b,
+		t_doubool action
+		);	// FILE: checker_instructions.c
+void
+	c_push(
+		t_stack *a,
+		t_stack *b,
+		t_doubool action
+		);	// FILE: checker_instructions.c
+void
+	c_wrng(
+		t_stack *a,
+		t_stack *b,
+		t_doubool action
+		);	// FILE: checker_instructions.c
 //		Miscellany
 int	
 	ft_ternary(

@@ -6,7 +6,7 @@
 #    By: mde-beer <mde-beer@student.codam.nl>          +#+                     #
 #                                                     +#+                      #
 #    Created: 2024/11/27 13:22:56 by mde-beer       #+#    #+#                 #
-#    Updated: 2024/11/28 20:39:32 by mde-beer       ########   odam.nl         #
+#    Updated: 2024/11/29 20:30:20 by mde-beer       ########   odam.nl         #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,23 @@ LIBFTDIR		=	libft
 LIBFT			=	$(LIBFTDIR)/libft.a
 INCLDIR			=	include $(LIBFTDIR)/include
 SOURCE			=	$(addprefix $(SRCDIR)/,$(SRC))
-OBJECTS			=	$(addprefix $(OBJDIR)/,$(SRC:.c=.o))
+OBJECTS			=	$(addprefix $(OBJDIR)/,$(OBJ))
 INCLUDE			=	$(addprefix -I ,$(INCLDIR))
+
+BONUSSRC		=	checker.c \
+					checker_instructions.c
+BONUSOBJ		=	$(BONUSSRC:.c=.o)
 NAME			=	push_swap
 
 all				:	$(NAME)
 
 $(NAME)			:	$(OBJECTS) $(LIBFT)
 				$(CC) $(CFLAGS) $(INCLUDE) $(OBJECTS) $(LIBFT) -o $@
+
+bonus			:	bonus_checker
+
+bonus_checker	:	$(addprefix $(OBJDIR)/,$(BONUSOBJ)) $(OBJECTS) $(LIBFT)
+				$(CC) $(CFLAGS) $(INCLUDE) $(OBJECTS) $(addprefix $(OBJDIR)/,$(BONUSOBJ)) $(LIBFT) -o bonus_checker
 
 $(OBJDIR)/%.o	:	$(SRCDIR)/%.c $(OBJDIR)
 				$(CC) $(CFLAGS) -c $(INCLUDE) $< -o $@
@@ -58,4 +67,4 @@ fclean			: clean
 
 re				: fclean all
 
-.PHONY			: clean fclean re
+.PHONY			: clean fclean re bonus all
