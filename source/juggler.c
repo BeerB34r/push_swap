@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/18 17:59:34 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/28 20:37:34 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/12/02 17:49:52 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,54 +68,6 @@ t_doubool direction
 }
 
 void
-	rotate_tandem(
-t_stack *a,
-t_stack *b,
-t_hero hero,
-t_doubool direction
-)
-{
-	while (hero.oracle.top > 0 && hero.oracle.place > 0)
-	{
-		hero.oracle.top--;
-		hero.oracle.place--;
-		orot(a, b, (left | right));
-	}
-	while (hero.oracle.top < 0 && hero.oracle.place < 0)
-	{
-		hero.oracle.top++;
-		hero.oracle.place++;
-		rrot(a, b, (left | right));
-	}
-	while (hero.oracle.top)
-	{
-		if (hero.oracle.top < 0)
-		{
-			hero.oracle.top++;
-			rrot(a, b, (0b11 ^ direction));
-		}
-		else
-		{
-			hero.oracle.top--;
-			orot(a, b, (0b11 ^ direction));
-		}
-	}
-	while (hero.oracle.place)
-	{
-		if (hero.oracle.place < 0)
-		{
-			hero.oracle.place++;
-			rrot(a, b, direction);
-		}
-		else
-		{
-			hero.oracle.place--;
-			orot(a, b, direction);
-		}
-	}
-}
-
-void
 	push_min(
 t_stack *a,
 t_stack *b,
@@ -152,9 +104,7 @@ t_stack a
 		push_min(&a, &b, right_compare, right);
 	if (!is_rotated_order(a, &lesser))
 		swap(&a, &b, left);
-	//display_stack(a),ft_printf("\n"),display_stack(b);
 	while (b.size)
 		push_min(&a, &b, left_compare, left);
-	//display_stack(a);
 	return (rotate_order(&a, condition_in_dlist(a.head, &lesser), left));
 }

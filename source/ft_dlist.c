@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/15 18:33:40 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 12:44:49 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/12/02 12:53:08 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,16 @@ t_dlist *node
 	t_dlist *const	d = node->next->next;
 
 	a->next = c;
-	b->next = d;
+	if (b != d)
+		b->next = d;
+	else
+		b->next = c;
 	c->next = b;
 	d->prev = b;
-	c->prev = a;
+	if (c != a)
+		c->prev = a;
+	else
+		c->prev = b;
 	b->prev = c;
 }
 

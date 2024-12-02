@@ -6,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>  a       +#+                    */
 /*    lmao                                            +#+                     */
 /*   Created: 2024/11/19 14:47:55 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/27 18:28:14 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/12/02 16:17:36 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int rp
 	const int	swish = ot + ft_abs(rp);
 	const int	swash = ft_abs(rt) + op;
 	const int	ocost = ft_ternary(ot < op, ot, op) + ft_abs(ot - op);
-	const int	rcost = ft_abs(ft_ternary(rt < rp, rt, rp)) - ft_abs(rt - rp);
+	const int	rcost = ft_abs(ft_ternary(rt < rp, rt, rp)) + ft_abs(rt - rp);
 	t_o_ret		ret;
 
 	ret = (t_o_ret){.cost = swish, .top = ot, .place = rp};

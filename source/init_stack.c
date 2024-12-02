@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/06 15:50:24 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 12:47:44 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/12/02 18:08:31 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int value
 	return (0);
 }
 
+// @returns LONG_MIN on error, not suited for actual long calcs
 static long
 	atol_lim(
 char *string,
@@ -72,7 +73,7 @@ long u_bound
 	{
 		out = (out * 10) + ((*string++ - 0x30) * sign);
 		if (l_bound > out || out > u_bound)
-			throw_error(1);
+			return (LONG_MIN);
 	}
 	return (out);
 }
@@ -97,6 +98,8 @@ char **argv
 	while (++i < argc)
 	{
 		if (!is_int(argv[i]))
+			throw_error((cleanup(head), 1));
+		if (atol_lim(argv[i], INT_MIN, INT_MAX) == LONG_MIN)
 			throw_error((cleanup(head), 1));
 		value = (int)atol_lim(argv[i], INT_MIN, INT_MAX);
 		if (is_dup(head, value) || push_bottom(&tail, value))

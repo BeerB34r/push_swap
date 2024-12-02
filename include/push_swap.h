@@ -1,20 +1,3 @@
-/*
-—————————————————————————————————No compliance?—————————————————————————————————
-						⠀⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝
-						⠸⡸⠜⠕⠕⠁⢁⢇⢏⢽⢺⣪⡳⡝⣎⣏⢯⢞⡿⣟⣷⣳⢯⡷⣽⢽⢯⣳⣫⠇
-						⠀⠀⢀⢀⢄⢬⢪⡪⡎⣆⡈⠚⠜⠕⠇⠗⠝⢕⢯⢫⣞⣯⣿⣻⡽⣏⢗⣗⠏⠀
-						⠀⠪⡪⡪⣪⢪⢺⢸⢢⢓⢆⢤⢀⠀⠀⠀⠀⠈⢊⢞⡾⣿⡯⣏⢮⠷⠁⠀⠀
-						⠀⠀⠀⠈⠊⠆⡃⠕⢕⢇⢇⢇⢇⢇⢏⢎⢎⢆⢄⠀⢑⣽⣿⢝⠲⠉⠀⠀⠀⠀
-						⠀⠀⠀⠀⠀⡿⠂⠠⠀⡇⢇⠕⢈⣀⠀⠁⠡⠣⡣⡫⣂⣿⠯⢪⠰⠂⠀⠀⠀⠀
-						⠀⠀⠀⠀⡦⡙⡂⢀⢤⢣⠣⡈⣾⡃⠠⠄⠀⡄⢱⣌⣶⢏⢊⠂⠀⠀⠀⠀⠀⠀
-						⠀⠀⠀⠀⢝⡲⣜⡮⡏⢎⢌⢂⠙⠢⠐⢀⢘⢵⣽⣿⡿⠁⠁⠀⠀⠀⠀⠀⠀⠀
-						⠀⠀⠀⠀⠨⣺⡺⡕⡕⡱⡑⡆⡕⡅⡕⡜⡼⢽⡻⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-						⠀⠀⠀⠀⣼⣳⣫⣾⣵⣗⡵⡱⡡⢣⢑⢕⢜⢕⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-						⠀⠀⠀⣴⣿⣾⣿⣿⣿⡿⡽⡑⢌⠪⡢⡣⣣⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-						⠀⠀⠀⡟⡾⣿⢿⢿⢵⣽⣾⣼⣘⢸⢸⣞⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-						⠀⠀⠀⠀⠁⠇⠡⠩⡫⢿⣝⡻⡮⣒⢽⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-————————————————————————————————————————————————————————————————————————————————
-*/
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                         ::::::::           */
@@ -23,7 +6,7 @@
 /*   By: mde-beer <mde-beer@student.codam.nl>          +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/25 16:02:22 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/25 16:02:22 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/12/02 18:40:04 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +20,9 @@
 # define OROT "r"
 # define RROT "rr"
 # define PUSH "p"
+# ifndef CHECKER
+#  define CHECKER 0
+# endif
 # ifndef VERBOSE
 #  define VERBOSE 0
 # endif
@@ -79,6 +65,15 @@ enum e_doubool
 };
 
 //	Function definitions
+int	
+	push_swap(
+		t_stack a
+		);	// FILE: juggler.c
+int	
+	checker(
+		int argc,
+		char **argv
+		);	// FILE: checker.c
 //		Stack and dlist
 t_stack
 	init_stack(
@@ -221,31 +216,7 @@ void
 		);	// FILE: instructions.c
 //		Checker
 void
-	c_swap(
-		t_stack *a,
-		t_stack *b,
-		t_doubool action
-		);	// FILE: checker_instructions.c
-void
-	c_orot(
-		t_stack *a,
-		t_stack *b,
-		t_doubool action
-		);	// FILE: checker_instructions.c
-void
-	c_rrot(
-		t_stack *a,
-		t_stack *b,
-		t_doubool action
-		);	// FILE: checker_instructions.c
-void
-	c_push(
-		t_stack *a,
-		t_stack *b,
-		t_doubool action
-		);	// FILE: checker_instructions.c
-void
-	c_wrng(
+	wrng(
 		t_stack *a,
 		t_stack *b,
 		t_doubool action
@@ -265,19 +236,22 @@ void
 	cleanup(
 		t_dlist *head
 		);	// FILE: program_management.c
-int
-	condition_in_dist(
+int	
+	condition_in_dlist(
 		t_dlist *node,
 		t_bool (*comparison)(int, int)
 		);	// FILE: juggler.c
-int
+int	
 	rotate_order(
 		t_stack *a,
 		int target,
 		t_doubool direction
 		);	// FILE: juggler.c
-int
-	pivot(
-		t_stack a
-		);	// FILE: killme.c
+void
+	rotate_tandem(
+		t_stack *a,
+		t_stack *b,
+		t_hero hero,
+		t_doubool direction
+		);	// FILE: rotate_tandem.c
 #endif

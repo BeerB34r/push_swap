@@ -6,7 +6,7 @@
 /*   By: mde-beer <marvin@42.fr>                       +#+                    */
 /*                                                    +#+                     */
 /*   Created: 2024/11/13 17:33:09 by mde-beer       #+#    #+#                */
-/*   Updated: 2024/11/28 19:18:45 by mde-beer       ########   odam.nl        */
+/*   Updated: 2024/12/02 18:19:50 by mde-beer       ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,14 @@ int value
 static int
 	copout(
 t_stack stack,
-int value,
 t_bool (*comparison)(int, int, int)
 )
 {
-	t_bool	(*cop)(int, int);
-	t_dlist	*current;
-	int		i;
-
 	if (comparison == &left_compare)
 		return (top_cost(stack, condition_in_dlist(stack.head, &lesser)));
 	return (top_cost(stack, condition_in_dlist(stack.head, &greater)));
 }
+
 /**
 *	determines the cost to place some @value not in @stack into its proper
 *	place.
@@ -82,7 +78,7 @@ t_bool (*comparison)(int, int, int)
 		i++;
 	}
 	if (!comparison(current->prev->value, value, current->value))
-		return (copout(stack, value, comparison));
+		return (copout(stack, comparison));
 	return (i);
 }
 

@@ -6,12 +6,12 @@
 #    By: mde-beer <mde-beer@student.codam.nl>          +#+                     #
 #                                                     +#+                      #
 #    Created: 2024/11/27 13:22:56 by mde-beer       #+#    #+#                 #
-#    Updated: 2024/11/29 20:30:20 by mde-beer       ########   odam.nl         #
+#    Updated: 2024/12/02 19:20:53 by mde-beer       ########   odam.nl         #
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	cc
-CFLAGS			=	-g
+CFLAGS			=	-Wall -Wextra -Werror -g
 SRC				=	accountancy.c \
 					curta.c \
 					ft_dlist.c \
@@ -22,20 +22,27 @@ SRC				=	accountancy.c \
 					program_management.c \
 					stack_management.c \
 					thief_of_joy.c \
-					killme.c
+					rotate_tandem.c \
+					main.c
 SRCDIR			=	source
 OBJ				=	$(SRC:.c=.o)
 OBJDIR			=	objects
 LIBFTDIR		=	libft
 LIBFT			=	$(LIBFTDIR)/libft.a
 INCLDIR			=	include $(LIBFTDIR)/include
+
 SOURCE			=	$(addprefix $(SRCDIR)/,$(SRC))
 OBJECTS			=	$(addprefix $(OBJDIR)/,$(OBJ))
 INCLUDE			=	$(addprefix -I ,$(INCLDIR))
 
 BONUSSRC		=	checker.c \
 					checker_instructions.c
+BONUSDIR		=	bonusobj
 BONUSOBJ		=	$(BONUSSRC:.c=.o)
+BONUSOBJECTS	=	$(addprefix $(BONUSDIR)/,$(BONUSOBJ)) \
+					$(addprefix $(BONUSDIR)/,$(OBJ))
+
+CHECKER			=	checker
 NAME			=	push_swap
 
 all				:	$(NAME)
@@ -43,16 +50,22 @@ all				:	$(NAME)
 $(NAME)			:	$(OBJECTS) $(LIBFT)
 				$(CC) $(CFLAGS) $(INCLUDE) $(OBJECTS) $(LIBFT) -o $@
 
-bonus			:	bonus_checker
+bonus			:	$(CHECKER)
 
-bonus_checker	:	$(addprefix $(OBJDIR)/,$(BONUSOBJ)) $(OBJECTS) $(LIBFT)
-				$(CC) $(CFLAGS) $(INCLUDE) $(OBJECTS) $(addprefix $(OBJDIR)/,$(BONUSOBJ)) $(LIBFT) -o bonus_checker
+$(CHECKER)		:	$(BONUSOBJECTS) $(LIBFT)
+				$(CC) $(CFLAGS) $(INCLUDE) $(BONUSOBJECTS) $(LIBFT) -D CHECKER=1 -o bonus_checker
 
-$(OBJDIR)/%.o	:	$(SRCDIR)/%.c $(OBJDIR)
+$(OBJDIR)/%.o	:	$(SRCDIR)/%.c | $(OBJDIR)
 				$(CC) $(CFLAGS) -c $(INCLUDE) $< -o $@
+
+$(BONUSDIR)/%.o	:	$(SRCDIR)/%.c | $(BONUSDIR)
+				$(CC) $(CFLAGS) -D CHECKER=1 -c $(INCLUDE) $< -o $@
 
 $(OBJDIR)		:
 				mkdir $(OBJDIR)
+
+$(BONUSDIR)		:
+				mkdir $(BONUSDIR)
 
 $(LIBFT)		:
 				make -C $(LIBFTDIR)
@@ -60,11 +73,11 @@ $(LIBFT)		:
 test			:	$(OBJECTS) $(LIBFT)
 				$(CC) $(CFLAGS) $(INCLUDE) $(OBJECTS) $(LIBFT) $(SRCDIR)/test.c -o $@
 clean			:
-				rm -rf $(OBJDIR)
+				rm -rf $(OBJDIR) $(BONUSDIR)
 
 fclean			: clean
-				rm -f $(NAME)
+				rm -f $(NAME) $(CHECKER)
 
 re				: fclean all
 
-.PHONY			: clean fclean re bonus all
+.PHONY			: clean fclean re
