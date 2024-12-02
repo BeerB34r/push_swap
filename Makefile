@@ -6,7 +6,7 @@
 #    By: mde-beer <mde-beer@student.codam.nl>          +#+                     #
 #                                                     +#+                      #
 #    Created: 2024/11/27 13:22:56 by mde-beer       #+#    #+#                 #
-#    Updated: 2024/12/02 19:29:49 by mde-beer       ########   odam.nl         #
+#    Updated: 2024/12/02 19:31:07 by mde-beer       ########   odam.nl         #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ $(NAME)			:	$(OBJECTS) $(LIBFT)
 bonus			:	$(CHECKER)
 
 $(CHECKER)		:	$(BONUSOBJECTS) $(LIBFT)
-				$(CC) $(CFLAGS) $(INCLUDE) $(BONUSOBJECTS) $(LIBFT) -D CHECKER=1 -o bonus_checker
+				$(CC) $(CFLAGS) $(INCLUDE) $(BONUSOBJECTS) $(LIBFT) -D CHECKER=1 -o $(CHECKER)
 
 $(OBJDIR)/%.o	:	$(SRCDIR)/%.c | $(OBJDIR)
 				$(CC) $(CFLAGS) -c $(INCLUDE) $< -o $@
