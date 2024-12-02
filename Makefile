@@ -6,7 +6,7 @@
 #    By: mde-beer <mde-beer@student.codam.nl>          +#+                     #
 #                                                     +#+                      #
 #    Created: 2024/11/27 13:22:56 by mde-beer       #+#    #+#                 #
-#    Updated: 2024/12/02 19:20:53 by mde-beer       ########   odam.nl         #
+#    Updated: 2024/12/02 19:29:49 by mde-beer       ########   odam.nl         #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,9 +73,11 @@ $(LIBFT)		:
 test			:	$(OBJECTS) $(LIBFT)
 				$(CC) $(CFLAGS) $(INCLUDE) $(OBJECTS) $(LIBFT) $(SRCDIR)/test.c -o $@
 clean			:
+				make clean -C $(LIBFTDIR)
 				rm -rf $(OBJDIR) $(BONUSDIR)
 
 fclean			: clean
+				make fclean -C $(LIBFTDIR)
 				rm -f $(NAME) $(CHECKER)
 
 re				: fclean all
